@@ -67,8 +67,6 @@ public class BookService {
 
     public void updateBook(BookDto updatedBook){
         Boolean bookExists=this.bookRepo.titleExists(updatedBook.getTitle()).isPresent();
-
-
         if(!bookExists){
             throw new BookNotFoundException(
                     "The book does not exist"
@@ -79,6 +77,7 @@ public class BookService {
 
 
         this.bookRepo.findById(bookHelper.getId()).map(book -> {
+
 
             book.setTitle(updatedBook.getTitle());
             book.setAuthor(updatedBook.getAuthor());

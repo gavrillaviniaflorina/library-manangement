@@ -119,31 +119,17 @@ public class BookServiceTest {
 
     }
 
-//    @Test
-//    public void itShouldUpdateBook(){
-//        BookDto book=new BookDto("w","e","q",12);
-//        book.setId(337L);
-//        doReturn(true).when(bookRepo).existsById(337L);
-//        doReturn(Optional.of(book)).when(bookRepo).findById(337L);
-//
-//        underTest.updateBook(book);
-//        then(bookRepo).should().save(bookArgumentCaptor.capture());
-//        Book book1=bookArgumentCaptor.getValue();
-//
-//        assertThat(book1).isEqualTo(book);
-//
-//    }
 
-//    @Test
-//    public void itShouldNotUpdatePerson(){
-//        Book book=new Book("w","e","q",12);
-//        book.setId(1L);
-//        doReturn(false).when(bookRepo).existsById(337L);
-//        doReturn(Optional.empty()).when(bookRepo).findById(337L);
-//
-//        assertThatThrownBy(()->underTest.updateBook(book)).isInstanceOf(BookNotFoundException.class).hasMessageContaining("The book does not exist");
+    @Test
+    public void itShouldNotUpdatePerson(){
+        BookDto book=new BookDto("w","e","q",12);
 
-   // }
+        doReturn(false).when(bookRepo).existsById(337L);
+        doReturn(Optional.empty()).when(bookRepo).findById(337L);
+
+        assertThatThrownBy(()->underTest.updateBook(book)).isInstanceOf(BookNotFoundException.class).hasMessageContaining("The book does not exist");
+
+    }
 }
 
 

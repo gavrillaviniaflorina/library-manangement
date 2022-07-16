@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface BookRepo extends JpaRepository<Book,Long> {
 
 
-    @Query(value = "select * from books where title like ?1",nativeQuery = true)
+    @Query(value = "select b from Book b where b.title = ?1")
     Optional<Book> titleExists(String title);
 
 }

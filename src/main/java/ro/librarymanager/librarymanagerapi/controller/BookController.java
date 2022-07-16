@@ -36,8 +36,10 @@ public class BookController {
         return new ResponseEntity<>(book,HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
-    public  void updateBook(@RequestBody BookDto updatedBook,@PathVariable Long id){
+    public  ResponseEntity<Book> updateBook(@RequestBody BookDto updatedBook,@PathVariable Long id){
      this.bookService.updateBook(updatedBook);
+
+     return  new ResponseEntity<Book>(this.bookService.findBook(id),HttpStatus.OK);
     }
 
     @GetMapping("/findBook/{id}")
@@ -53,10 +55,10 @@ public class BookController {
           return  new ResponseEntity<>(book,HttpStatus.OK);
     }
 
-    @GetMapping("/sort")
-    public ResponseEntity<List<Book>> sortBooksByTitile(){
-        return new ResponseEntity<List<Book>>(bookService.sortByName(),HttpStatus.OK);
-    }
+//    @GetMapping("/sort")
+//    public ResponseEntity<List<Book>> sortBooksByTitile(){
+//        return new ResponseEntity<List<Book>>(bookService.sortByName(),HttpStatus.OK);
+//    }
 
 
 
