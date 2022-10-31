@@ -1,6 +1,5 @@
 package ro.librarymanager.librarymanagerapi.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -17,26 +16,11 @@ import ro.librarymanager.librarymanagerapi.LibraryManagerApiApplication;
 import ro.librarymanager.librarymanagerapi.dto.BookDto;
 import ro.librarymanager.librarymanagerapi.model.Book;
 import ro.librarymanager.librarymanagerapi.repository.BookRepo;
-import ro.librarymanager.librarymanagerapi.service.BookService;
+import ro.librarymanager.librarymanagerapi.repository.service.BookService;
 
-import javax.naming.StringRefAddr;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import javax.naming.StringRefAddr;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -101,8 +85,6 @@ class BookControllerTest {
                 .content(String.valueOf(mapper.writeValueAsString(book))))
                 .andExpect(content().string(mapper.writeValueAsString(book1)))
                 .andExpect(status().isOk());
-
-
     }
 
     @Test

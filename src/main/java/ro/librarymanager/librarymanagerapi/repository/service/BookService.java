@@ -1,4 +1,4 @@
-package ro.librarymanager.librarymanagerapi.service;
+package ro.librarymanager.librarymanagerapi.repository.service;
 
 import org.springframework.stereotype.Service;
 import ro.librarymanager.librarymanagerapi.dto.BookDto;

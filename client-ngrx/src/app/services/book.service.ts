@@ -14,9 +14,9 @@ export class BookService {
 
   constructor(private http:HttpClient) { }
 
-  getBooks():Observable<CustomHttpResponse>{
+  getBooks():Observable<Book[]>{
     console.log('aici');
-    return this.http.get<CustomHttpResponse>(this.server+"/books");
+    return this.http.get<Book[]>(this.server+"/books");
   }
  
   private handleError(error: HttpErrorResponse): Observable<never> {

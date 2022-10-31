@@ -1,6 +1,5 @@
 package ro.librarymanager.librarymanagerapi.service;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -20,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mockito.*;
+import ro.librarymanager.librarymanagerapi.repository.service.BookService;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

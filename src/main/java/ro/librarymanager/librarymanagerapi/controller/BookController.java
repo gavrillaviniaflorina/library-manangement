@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.librarymanager.librarymanagerapi.dto.BookDto;
 import ro.librarymanager.librarymanagerapi.model.Book;
-import ro.librarymanager.librarymanagerapi.service.BookService;
+import ro.librarymanager.librarymanagerapi.repository.service.BookService;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/books")
 public class BookController {
 
-
+    
     private BookService bookService;
 
 
