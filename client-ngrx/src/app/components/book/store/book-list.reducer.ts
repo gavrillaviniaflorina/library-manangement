@@ -1,12 +1,13 @@
-import { Book } from "../book.model";
-import *  as Actions from './book-list.action';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { Book } from '../book.model';
+import * as Actions from './book-list.action';
 
 export interface State {
-  books : Book[];
+  books: Book[];
 }
 
 const initialState: State = {
-  books: []
+  books: [],
 };
 
 export function bookListReducer(
@@ -18,13 +19,20 @@ export function bookListReducer(
       console.log(action.payload);
       return {
         ...state,
-        books: action.payload
+        books: action.payload,
       };
-  default:  
-    console.log("ceva tare "+action.type);
-    return state; }
+    case Actions.ADD_BOOK:
+      return {
+        ...state,
+        books: [...state.books, action.payload],
+      };
+    case Actions.UPDATE_BOOK:
+      return {
+        ...state,
+        books: [...state.books.filter(e=>e.id!= action.payload.id), action.payload],
+      };
+
+    default:
+      return state;
+  }
 }
-
-
-
-

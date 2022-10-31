@@ -1,0 +1,19 @@
+<form [formGroup]="bookForm">
+    <p>
+        <label for="title">Title</label>
+        <input name="title" type="text" id="title" formControlName="title">
+    </p>
+    <p>
+        <label for="author">Author</label>
+        <input name="author" type="text" id="author" formControlName="author">
+    </p>
+    <p>
+        <label for="gen">Genre</label>
+        <input name="gen" type="text" id="gen" formControlName="gen">
+    </p>
+    <p>
+        <label for="year">Year</label>
+        <input name="year" type="text" id="year" formControlName="year">
+    </p>
+</form>
+<button (click)="onCreate()">Create new Book </button>
