@@ -18,7 +18,8 @@ export class BookDetailsComponent implements OnInit {
   //@ts-ignore
   bookForm: FormGroup;
   id:number=0;
-  book: Book | undefined;
+   //@ts-ignore
+  book: Book;
   subscription: Subscription | undefined;
 
   constructor(private store: Store<fromApp.AppState>,private bookService:BookService, private router:Router,private route:ActivatedRoute, private notificationService:NotificationService) {
@@ -27,9 +28,19 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params:Params )=>{
-      this.initForm();
         this.id=+params['id'];
+        this.initForm();
       })
+
+      this.bookService.getBook(this.id).subscribe(
+        (response) => {
+          // @ts-ignore
+          this.book = response;
+        },
+        (error: any) => this.notificationService.onError(error.reason),
+        () => {
+          this.reloadForm();
+        });
   }
 
 
@@ -40,8 +51,6 @@ export class BookDetailsComponent implements OnInit {
     let gen = "";
     let year = 0;
 
-
-
     this.bookForm = new FormGroup({
       'title': new FormControl(title, Validators.required),
       'author': new FormControl(author, Validators.required),
@@ -49,6 +58,16 @@ export class BookDetailsComponent implements OnInit {
       'year': new FormControl(year, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
     })
 
+  }
+
+
+  private reloadForm(): void{
+    this.bookForm = new FormGroup({
+      'title': new FormControl(this.book.title, Validators.required),
+      'author': new FormControl(this.book.author, Validators.required),
+      'gen': new FormControl(this.book.gen, Validators.required),
+      'year': new FormControl(this.book.year, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+    })
   }
 
   onCancel(): void {
@@ -80,6 +99,15 @@ export class BookDetailsComponent implements OnInit {
     } else {
       this.validate();
     }
+  }
+
+  onDelete(): void{
+    this.bookService.deleteBook(this.id).subscribe(response=>{
+      this.notificationService.onSuccess('Done');
+      this.store.dispatch(new BooksActions.DeleteBook(this.book));
+      this.router.navigate(['/']);
+ 
+     })
   }
 
 

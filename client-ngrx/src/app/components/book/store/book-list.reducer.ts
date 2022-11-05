@@ -16,7 +16,6 @@ export function bookListReducer(
 ) {
   switch (action.type) {
     case Actions.SET_BOOKS:
-      console.log(action.payload);
       return {
         ...state,
         books: action.payload,
@@ -27,10 +26,16 @@ export function bookListReducer(
         books: [...state.books, action.payload],
       };
     case Actions.UPDATE_BOOK:
+      console.log(action.payload);
       return {
         ...state,
-        books: [...state.books.filter(e=>e.id!= action.payload.id), action.payload],
+        books: [...state.books.filter(e=>e.title!= action.payload.title), action.payload],
       };
+      case Actions.DELETE_BOOK:
+      return {
+        ...state,
+        books: [...state.books.filter(e=>e.title!= action.payload.title)],
+      }
 
     default:
       return state;

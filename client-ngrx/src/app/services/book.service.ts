@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Book } from '../components/book/book.model';
 import { CustomHttpResponse } from '../interfaces/custom-http-response';
@@ -15,9 +15,28 @@ export class BookService {
   constructor(private http:HttpClient) { }
 
   getBooks():Observable<Book[]>{
-    console.log('aici');
     return this.http.get<Book[]>(this.server+"/books");
   }
+
+  addBook(book:Book):Observable<Book>{
+    return this.http.post<Book>(this.server+"/books/add",book);
+  }
+
+  updateBook(book: Book ,id:number):Observable<Book> {
+    return  this.http.put<Book>
+      (`${this.server}/books/${id}`, book).pipe(catchError(this.handleError));
+  }
+
+  getBook(bookId:number):Observable<Book>{
+    return this.http.get<Book>(`${this.server}/books/findBook/${bookId}`).pipe(
+      catchError(this.handleError)
+    )
+    ;
+  }
+
+  deleteBook(id:number):Observable<Book>{
+   return this.http.delete<Book>(`${this.server}/books/delete/${id}`).pipe(catchError(this.handleError));
+ }
  
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

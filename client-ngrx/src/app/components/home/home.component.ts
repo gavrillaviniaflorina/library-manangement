@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
    this.books$ = this.store.select('bookList');
    this.booksSubcriptions=this.books$.subscribe((e: { books: Book[]; })=>{
-      console.log(e);
       this.books=e.books;
       this.booksLoaded=true;
     })

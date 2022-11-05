@@ -13,12 +13,18 @@ import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from './components/book/store/book-list.effects';
+import { NewBookComponent } from './components/new-book/new-book.component';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BookDetailsComponent } from './components/book-details/book-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
-    HomeComponent
+    HomeComponent,
+    NewBookComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +36,8 @@ import { BooksEffects } from './components/book/store/book-list.effects';
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     EffectsModule.forRoot([BooksEffects]),
     StoreRouterConnectingModule.forRoot(),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
