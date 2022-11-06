@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mockito.*;
-import ro.librarymanager.librarymanagerapi.repository.service.BookService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
