@@ -16,7 +16,7 @@ import ro.librarymanager.librarymanagerapi.LibraryManagerApiApplication;
 import ro.librarymanager.librarymanagerapi.dto.BookDto;
 import ro.librarymanager.librarymanagerapi.model.Book;
 import ro.librarymanager.librarymanagerapi.repository.BookRepo;
-import ro.librarymanager.librarymanagerapi.repository.service.BookService;
+import ro.librarymanager.librarymanagerapi.service.BookService;
 
 import java.util.ArrayList;
 import java.util.List;
