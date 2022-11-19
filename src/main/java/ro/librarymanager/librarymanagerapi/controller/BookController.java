@@ -24,7 +24,6 @@ public class BookController {
         this.bookService = bookService;
     }
 
-
     @GetMapping
     public ResponseEntity<List<Book>> getBooks(){
         return  new ResponseEntity<List<Book>>(bookService.getAll(), HttpStatus.OK);

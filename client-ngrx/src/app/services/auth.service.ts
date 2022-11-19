@@ -12,7 +12,7 @@ import { LoginResponse } from '../components/user/store/authResponseData';
   providedIn: 'root'
 })
 export class AuthService {
-  private server = environment.apiUrl+"/api/v1";
+  private server = environment.apiUrl;
   private tokenExpirationTimer: any;
 
   constructor(

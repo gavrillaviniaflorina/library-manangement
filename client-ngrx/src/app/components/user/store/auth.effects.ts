@@ -1,12 +1,11 @@
 import * as AuthAction from './auth.actions';
 import { User } from "../user.model";
 import { identifierName } from '@angular/compiler';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, take, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { Login } from '../../login/login.model';
 
@@ -58,6 +57,7 @@ const handleError = (errorRes: any) => {
     authLogin$ = createEffect(()=> {
         return this.actions$.pipe(
             ofType(AuthAction.LOGIN_START),
+            tap(()=>console.log("efect")),
             switchMap((authData: AuthAction.LoginStart) => {
                 return this.authService.login(new Login(authData.payload.email, authData.payload.password))
                     .pipe(

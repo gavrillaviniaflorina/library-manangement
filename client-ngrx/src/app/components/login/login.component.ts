@@ -17,14 +17,20 @@ export class LoginComponent  implements OnInit, OnDestroy {
   }
 
   private storeSub: Subscription=new Subscription();
+  
+  private error: string ="";
 
   ngOnInit(): void {
-    this.storeSub=this.store.select('user').subscribe();
-
+    this.storeSub=this.store.select('user').subscribe((data)=>{
+      this.error=data.authError;
+      if(data.authError==''){
+        this.router.navigate(['/books']);
+       }
+    });
   }
 
   ngOnDestroy(): void {
-   this.storeSub.unsubscribe();
+    this.storeSub.unsubscribe();
   }
   //@ts-ignore
   loginForm:FormGroup;
@@ -34,13 +40,12 @@ export class LoginComponent  implements OnInit, OnDestroy {
   const email= form.value.email;
   const password = form.value.password;
 
+
   this.store.dispatch(
     new AuthActions.LoginStart({email:email, password:password})
   )
 
-  this.router.navigate(['/books']);
   form.reset();
  }
 
- 
 }
