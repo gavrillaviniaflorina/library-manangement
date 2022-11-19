@@ -17,6 +17,9 @@ import { NewBookComponent } from './components/new-book/new-book.component';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthEffects } from './components/user/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
     HomeComponent,
     NewBookComponent,
     BookDetailsComponent,
+    UserComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-    EffectsModule.forRoot([BooksEffects]),
+    EffectsModule.forRoot([BooksEffects, AuthEffects]),
     StoreRouterConnectingModule.forRoot(),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
