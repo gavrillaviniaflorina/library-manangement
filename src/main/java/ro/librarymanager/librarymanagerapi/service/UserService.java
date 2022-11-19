@@ -46,6 +46,17 @@ public class UserService {
         return  this.userRepository.selectedEmailExists(email).get();
     }
 
+    public Long findIdByUserName(String email){
+        boolean idExists = this.userRepository.findIdByUserName(email).isEmpty();
+
+        if(idExists){
+            throw  new UserNotFoundException("User not found");
+        }
+
+        return this.userRepository.findIdByUserName(email).get();
+
+    }
+
 
 
 

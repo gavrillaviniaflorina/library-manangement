@@ -26,7 +26,6 @@ public class BookController {
 
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
     public ResponseEntity<List<Book>> getBooks(){
         return  new ResponseEntity<List<Book>>(bookService.getAll(), HttpStatus.OK);
     }

@@ -33,15 +33,15 @@ public class LibraryManagerApiApplication {
             BookRepo bookRepo,
             UserRepo userRepo){
         return args -> {
-            Faker faker=new Faker();
-
-
-            User user =new User("lavinia.gavril@gamil.com","123");
-            userRepo.save(user);
-            for(int i=0;i<=5;i++){
-                Book b=new Book(faker.book().title(),faker.book().author(),faker.book().genre(),(int)(Math.random()*2000+1000));
-                bookRepo.save(b);
-            }
+//            Faker faker=new Faker();
+//
+//
+//            User user =new User("lavinia.gavril@gamil.com","123");
+//            userRepo.save(user);
+//            for(int i=0;i<=5;i++){
+//                Book b=new Book(faker.book().title(),faker.book().author(),faker.book().genre(),(int)(Math.random()*2000+1000));
+//                bookRepo.save(b);
+//            }
         };
 
     }
@@ -56,7 +56,7 @@ public class LibraryManagerApiApplication {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
                 "Accept", "Jwt-Token", "Authorization", "Origin, Accept", "X-Requested-With",
                 "Access-Control-Request-Method", "Access-Control-Request-Headers"));
