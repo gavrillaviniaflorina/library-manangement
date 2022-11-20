@@ -7,13 +7,14 @@ import { act } from "@ngrx/effects";
 export interface State {
     user: User;
     authError: string;
-    loading:boolean;
+    loggedIn:boolean;
 }
 
 const initialState : State = {
     user: new User( 0, "", ""),
-    authError: "flag",
-    loading:false
+    authError: "",
+    loggedIn:false
+
 };
 
 export function authReducer(
@@ -32,7 +33,7 @@ export function authReducer(
                 ...state,
                 authError:"",
                 user: user,
-                loading: false
+                loggedIn: true
               };
 
         case AuthActions.AUTHENTICATE_FAIL:
@@ -41,9 +42,18 @@ export function authReducer(
                 ...state,
                 authError:  action.payload,
                 user: null,
-                loading: false
+                loggedIn: false
               };
-            
+        
+        case AuthActions.LOGOUT:
+           
+            return {
+                ...state,
+                authError:"",
+                user: null,
+                loggedIn: false
+            }
+
         default:
             return state;
     }

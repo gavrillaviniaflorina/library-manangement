@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import ro.librarymanager.librarymanagerapi.dto.LoginResponse;
+import ro.librarymanager.librarymanagerapi.dto.RegisterResponse;
 import ro.librarymanager.librarymanagerapi.dto.UserDto;
 import ro.librarymanager.librarymanagerapi.jwt.JWTTokenProvider;
 import ro.librarymanager.librarymanagerapi.model.User;
@@ -46,9 +47,16 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> addUser(@RequestBody UserDto user){
+    public ResponseEntity<RegisterResponse> addUser(@RequestBody UserDto user){
         this.userService.addUser(user);
-        return  new ResponseEntity<>(user, OK);
+        User loginUser = userService.findUserByEmail(user.getEmail());
+        User userPrincipal = new User(loginUser.getEmail(), loginUser.getPassword());
+        HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
+        Long userId= this.userService.findIdByUserName(user.getEmail());
+        RegisterResponse registerResponse= new RegisterResponse(userId, user.getEmail(),jwtHeader.getFirst(JWT_TOKEN_HEADER));
+        authenticate(user.getEmail(), user.getPassword());
+
+        return  new ResponseEntity<>(registerResponse,jwtHeader, OK);
     }
 
     private HttpHeaders getJwtHeader(User user) {
