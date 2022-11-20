@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from "../user/store/auth.actions"
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -44,6 +45,7 @@ export class LoginComponent  implements OnInit, OnDestroy {
   this.store.dispatch(
     new AuthActions.LoginStart({email:email, password:password})
   )
+
 
   form.reset();
  }

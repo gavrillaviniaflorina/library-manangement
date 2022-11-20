@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpInterceptor,
   HttpRequest,
   HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
   HttpParams
 } from '@angular/common/http';
-import { take, exhaustMap, map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { exhaustMap, take, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import * as fromApp from '../../store/app.reducer';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -24,10 +25,10 @@ export class AuthInterceptorService implements HttpInterceptor {
         if (!user) {
           return next.handle(req);
         }
-        const modifiedReq = req.clone({
-          params: new HttpParams().set('user', user.token)
-        });
-        return next.handle(modifiedReq);
+        const httpRequest=req.clone({
+          setHeaders:{Authorization: `Bearer ${user.token}`}
+        });        
+        return next.handle(httpRequest);
       })
     );
   }

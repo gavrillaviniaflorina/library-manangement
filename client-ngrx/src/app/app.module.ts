@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookComponent } from './components/book/book.component';
@@ -20,6 +20,8 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthEffects } from './components/user/store/auth.effects';
+import {AuthInterceptorService} from './components/user/auth.interceptor'
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { AuthEffects } from './components/user/store/auth.effects';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [ AuthService,
+  {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptorService, multi:true}   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

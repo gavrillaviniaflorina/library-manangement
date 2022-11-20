@@ -26,7 +26,6 @@ export function bookListReducer(
         books: [...state.books, action.payload],
       };
     case Actions.UPDATE_BOOK:
-      console.log(action.payload);
       return {
         ...state,
         books: [...state.books.filter(e=>e.title!= action.payload.title), action.payload],

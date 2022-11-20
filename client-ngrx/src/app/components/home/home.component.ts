@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../book/book.model';
 import * as fromApp from '../../store/app.reducer';
+import * as BookActions from '../book/store/book-list.action'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,7 +33,12 @@ export class HomeComponent implements OnInit {
    this.booksSubcriptions=this.books$.subscribe((e: { books: Book[]; })=>{
       this.books=e.books;
       this.booksLoaded=true;
+      
     })
+
+    this.store.dispatch(
+      new BookActions.SetBooks(this.books)
+    )
 
   }
 
