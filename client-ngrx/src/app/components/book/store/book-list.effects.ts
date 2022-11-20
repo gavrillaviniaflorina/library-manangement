@@ -15,6 +15,7 @@ export class BooksEffects {
         this.actions$.pipe(
             ofType(BooksActions.SET_BOOKS),
             take(1),
+           
             switchMap(() => this.bookService.getBooks().pipe(
                 map(response => new BooksActions.SetBooks(response)),
                 catchError(error => {

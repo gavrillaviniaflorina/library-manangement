@@ -10,7 +10,6 @@ export class SetBooks implements Action{
     readonly type = SET_BOOKS;
 
     constructor( public payload: Book[]){
-        // console.log(this.payload);
     }
 }
 

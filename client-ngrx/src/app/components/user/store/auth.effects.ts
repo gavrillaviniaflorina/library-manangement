@@ -57,7 +57,6 @@ const handleError = (errorRes: any) => {
     authLogin$ = createEffect(()=> {
         return this.actions$.pipe(
             ofType(AuthAction.LOGIN_START),
-            tap(()=>console.log("efect")),
             switchMap((authData: AuthAction.LoginStart) => {
                 return this.authService.login(new Login(authData.payload.email, authData.payload.password))
                     .pipe(

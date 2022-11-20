@@ -20,7 +20,6 @@ export function authReducer(
     state = initialState,
     action: AuthActions.AuthActions
 ){
-     console.log("reducer");
     switch(action.type){
         case AuthActions.AUTHENTICATE_SUCCESS:
             
