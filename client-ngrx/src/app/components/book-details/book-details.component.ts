@@ -15,29 +15,30 @@ import * as BooksActions from '../book/store/book-list.action';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit, OnDestroy {
+
   //@ts-ignore
   bookForm: FormGroup;
   id:number=0;
+
    //@ts-ignore
   private book: Book;
   private routerSubscription: Subscription | undefined;
   private bookSubscription:Subscription | undefined;
 
   constructor(private store: Store<fromApp.AppState>,private bookService:BookService, private router:Router,private route:ActivatedRoute, private notificationService:NotificationService) {
-
-   }
-  ngOnDestroy(): void {
-    this.routerSubscription?.unsubscribe();
-    this.bookSubscription?.unsubscribe();
   }
 
   ngOnInit(): void {
     this.routerSubscription=this.route.params.subscribe((params:Params )=>{
-        this.id=+params['id'];
-        this.initForm();
-      })
-    this.getBook(this.id);
-      
+      this.id=+params['id'];
+      this.initForm();
+    })
+  this.getBook(this.id);   
+  }
+  
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
+    this.bookSubscription?.unsubscribe();
   }
 
   onCancel(): void {
@@ -48,7 +49,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     if(this.bookForm.valid ==true) {
       this.bookService.updateBook(this.bookForm.value, this.id).subscribe({
         next:(response:Book) =>{ this.notificationService.onSuccess('Done');
-        this.store.dispatch(new BooksActions.UpdateBook(this.bookForm.value));
+        this.store.dispatch(new BooksActions.UpdateBook(response));
       },
         error: (error:any) => this.notificationService.onError('Error'),
         complete:() => this.router.navigate(['/'])
@@ -70,7 +71,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   private getBook(id:number): void{
     this.bookSubscription=this.bookService.getBook(this.id).subscribe({
       next:(response:Book)=>{
-        // @ts-ignore
         this.book = response;
       },
       error:(error:any) => this.notificationService.onError(error.reason),
@@ -86,7 +86,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     let year = 0;
 
     this.bookForm = new FormGroup({
-      'id':new FormControl(0),
       'title': new FormControl(title, Validators.required),
       'author': new FormControl(author, Validators.required),
       'gen': new FormControl(gen, Validators.required),
@@ -116,5 +115,4 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       this.notificationService.onError("year must be a number")
     }
   }
-
 }

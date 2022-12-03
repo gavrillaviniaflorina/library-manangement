@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -18,12 +18,9 @@ export class LoginComponent  implements OnInit, OnDestroy {
   }
 
   private storeSub: Subscription=new Subscription();
-  
-  private error: string ="";
 
   ngOnInit(): void {
     this.storeSub=this.store.select('user').subscribe((data)=>{
-      this.error=data.authError;
       if(data.loggedIn==true){
         this.router.navigate(['/books']);
        }

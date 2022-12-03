@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../book/book.model';
 import * as fromApp from '../../store/app.reducer';
@@ -14,19 +14,14 @@ import * as AuthActions from '../user/store/auth.actions'
 })
 export class HomeComponent implements OnInit {
 
- 
   books: Book[] = [];
-
   booksLoaded = false;
-
-  booksSubcriptions: Subscription= new Subscription();
   // @ts-ignore
-  public books$: Observable<{ books: Book[]; }>
+   books$: Observable<{ books: Book[]; }>
 
+  private booksSubcriptions: Subscription= new Subscription();
 
   constructor(private store: Store<fromApp.AppState> , private router: Router) {
-
-
   }
 
   ngOnInit(): void {
@@ -41,17 +36,15 @@ export class HomeComponent implements OnInit {
     )
   }
 
-
   ngOnDestroy(): void {    
     this.booksSubcriptions.unsubscribe();
   }
 
   onClick() {
-    // @ts-ignore
     this.router.navigate(['/books/new']);
   }
 
-  Logout(){
+  logout(){
     localStorage.removeItem('userData');
     this.router.navigate(['/login']);
     this.store.dispatch(

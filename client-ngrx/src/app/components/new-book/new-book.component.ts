@@ -22,7 +22,6 @@ export class NewBookComponent implements OnInit {
   subscription: Subscription | undefined;
 
   constructor(private store: Store<fromApp.AppState>,private bookService:BookService, private router:Router,private route:ActivatedRoute, private notificationService:NotificationService) {
-
    }
 
   ngOnInit(): void {
@@ -32,30 +31,8 @@ export class NewBookComponent implements OnInit {
       })
   }
 
-  private initForm(): void {
-
-    this.bookForm = new FormGroup({
-      'title': new FormControl(null, Validators.required),
-      'author': new FormControl(null, Validators.required),
-      'gen': new FormControl(null, Validators.required),
-      'year': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
-    })
-  }
-
   onCancel(): void {
     this.router.navigate(['/']);
-  }
-
-  validate(): void {
-    for(let e in this.bookForm.value){
-        if(this.bookForm.value[e] == null) {
-          this.notificationService.onError(e + " is required ");
-        }
-    }
-
-    if (this.bookForm.value['year'] != null && this.bookForm.value['year'].match(/^[1-9]+[0-9]*$/) == null) {
-      this.notificationService.onError("year must be a number")
-    }
   }
 
   onCreate(): void {
@@ -75,5 +52,27 @@ export class NewBookComponent implements OnInit {
     } else {
       this.validate();
     }   
+  }
+
+  private initForm(): void {
+
+    this.bookForm = new FormGroup({
+      'title': new FormControl(null, Validators.required),
+      'author': new FormControl(null, Validators.required),
+      'gen': new FormControl(null, Validators.required),
+      'year': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+    })
+  }
+
+  private validate(): void {
+    for(let e in this.bookForm.value){
+        if(this.bookForm.value[e] == null) {
+          this.notificationService.onError(e + " is required ");
+        }
+    }
+
+    if (this.bookForm.value['year'] != null && this.bookForm.value['year'].match(/^[1-9]+[0-9]*$/) == null) {
+      this.notificationService.onError("year must be a number")
+    }
   }
 }
