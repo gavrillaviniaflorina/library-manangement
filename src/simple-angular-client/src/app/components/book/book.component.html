@@ -1,0 +1,11 @@
+<!-- <th class="title" scope="row">${obj.title}</th>
+<td>${obj.author}</td>
+<td>${obj.gen}</td>
+<td>${obj.year}</td> -->
+
+
+
+<th class="title" [routerLink]="'update/'+[book.id]" scope="row">{{book.title}}</th>
+<td>{{book.author}}</td>
+<td>{{book.gen}}</td>
+<td>{{book.year}}</td>
