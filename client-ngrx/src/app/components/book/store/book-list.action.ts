@@ -1,7 +1,6 @@
 import { Action } from "@ngrx/store";
 import { Book } from "../book.model";
 
-
 export const SET_BOOKS = '[Books] Set Books';
 export const ADD_BOOK = 'ADD BOOK';
 export const UPDATE_BOOK ='UPDATE BOOK';
@@ -30,6 +29,5 @@ export class DeleteBook implements Action {
     readonly type = DELETE_BOOK;
     constructor(public payload: Book){}   
   }
-
 
 export type BookListAction = SetBooks|AddBook|UpdateBook|DeleteBook;

@@ -1,9 +1,6 @@
-import { InitialState } from "@ngrx/store/src/models";
 import { User } from "../user.model";
 import * as AuthActions from '../store/auth.actions'
-import { AUTHENTICATE_SUCCESS } from "../store/auth.actions";
-import { Action } from "rxjs/internal/scheduler/Action";
-import { act } from "@ngrx/effects";
+
 export interface State {
     user: User;
     authError: string;

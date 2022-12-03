@@ -31,16 +31,16 @@ public class BookController {
 
     @PostMapping("/add")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
-    public ResponseEntity<BookDto> addBook(@RequestBody BookDto book){
+    public ResponseEntity<Book> addBook(@RequestBody BookDto book){
         this.bookService.addBook(book);
+        Book newBook = this.bookService.getBookByTitle(book.getTitle());
 
-        return new ResponseEntity<>(book,HttpStatus.OK);
+        return new ResponseEntity<>(newBook,HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
     @PreAuthorize("hasAnyRole('ROLE_USER')")
-    public  ResponseEntity<Book> updateBook(@RequestBody BookDto updatedBook,@PathVariable Long id){
-     this.bookService.updateBook(updatedBook);
-
+    public  ResponseEntity<Book> updateBook(@RequestBody BookDto book,@PathVariable Long id){
+     this.bookService.updateBook(book);
      return  new ResponseEntity<Book>(this.bookService.findBook(id),HttpStatus.OK);
     }
 

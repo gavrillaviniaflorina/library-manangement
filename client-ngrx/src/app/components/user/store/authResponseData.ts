@@ -5,7 +5,6 @@ export interface LoginResponse {
     token: string;    
 }
 
-
 export interface RegisterResponse {
     userId: number;
     email: string;
