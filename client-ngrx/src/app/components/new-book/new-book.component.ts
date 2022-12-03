@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Route, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Book } from '../book/book.model';
 import * as fromApp from '../../store/app.reducer';
-import { BooksEffects } from '../book/store/book-list.effects';
 import * as BooksActions from '../book/store/book-list.action';
 @Component({
   selector: 'app-new-book',
@@ -33,29 +32,19 @@ export class NewBookComponent implements OnInit {
       })
   }
 
-
   private initForm(): void {
 
-    let title = "";
-    let author = "";
-    let gen = "";
-    let year = 0;
-
-
-
     this.bookForm = new FormGroup({
-      'title': new FormControl(title, Validators.required),
-      'author': new FormControl(author, Validators.required),
-      'gen': new FormControl(gen, Validators.required),
-      'year': new FormControl(year, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+      'title': new FormControl(null, Validators.required),
+      'author': new FormControl(null, Validators.required),
+      'gen': new FormControl(null, Validators.required),
+      'year': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
     })
-
   }
 
   onCancel(): void {
     this.router.navigate(['/']);
   }
-
 
   validate(): void {
     for(let e in this.bookForm.value){
@@ -73,10 +62,10 @@ export class NewBookComponent implements OnInit {
     if(this.bookForm.valid == true) {
 
       this.bookService.addBook(this.bookForm.value).subscribe({
-        next: (response) => { console.log(response);
-
+        next: (response:Book) => { 
+          console.log(response);
               this.notificationService.onSuccess('Succes');
-              this.store.dispatch(new BooksActions.AddBook(this.bookForm.value));
+              this.store.dispatch(new BooksActions.AddBook(response));
               
               }, 
         error: (error: any)=> this.notificationService.onError(error)

@@ -26,7 +26,7 @@ export class BookService {
 
   updateBook(book: Book ,id:number):Observable<Book> {
     return  this.http.put<Book>
-      (`${this.server}/books/${id}`, book).pipe(catchError(this.handleError));
+      (`${this.server}/books/update/${id}`, book).pipe(catchError(this.handleError));
   }
 
   getBook(bookId:number):Observable<Book>{

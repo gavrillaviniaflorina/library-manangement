@@ -28,6 +28,10 @@ export class LoginComponent  implements OnInit, OnDestroy {
         this.router.navigate(['/books']);
        }
     });
+
+    this.store.dispatch(
+      new AuthActions.AutoLogin()
+    )
   }
 
   ngOnDestroy(): void {
@@ -59,5 +63,11 @@ export class LoginComponent  implements OnInit, OnDestroy {
 
   form.reset();
  }
+
+ AutoLogin(){
+  this.store.dispatch(
+    new AuthActions.AutoLogin()
+  )
+}
 
 }

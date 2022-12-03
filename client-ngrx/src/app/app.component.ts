@@ -13,15 +13,10 @@ export class AppComponent {
 
   @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
     console.log("Processing beforeunload...");
-    this.refresh();
   }
 
   public constructor(private router:Router, private store: Store<fromApp.AppState>){
+    this.router.navigate(['/']);
   }
 
-  private refresh(){
-    this.store.dispatch(
-      new AuthActions.AutoLogin()
-    )
-  }
 }

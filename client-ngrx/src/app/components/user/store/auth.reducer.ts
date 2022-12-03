@@ -23,8 +23,9 @@ export function authReducer(
 ){
     switch(action.type){
         case AuthActions.AUTHENTICATE_SUCCESS:
-            
+            console.log('aici')
             const user = new User(
+               
                 action.payload.userId,
                 action.payload.email,
                 action.payload.token,
@@ -37,7 +38,7 @@ export function authReducer(
               };
 
         case AuthActions.AUTHENTICATE_FAIL:
-
+            console.log('aici')
            return {
                 ...state,
                 authError:  action.payload,
@@ -53,7 +54,6 @@ export function authReducer(
                 user: null,
                 loggedIn: false
             }
-
         default:
             return state;
     }

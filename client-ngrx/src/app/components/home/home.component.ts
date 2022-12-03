@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
     this.store.dispatch(
       new AuthActions.Logout()
-    )
-    
+    )   
   }
 }

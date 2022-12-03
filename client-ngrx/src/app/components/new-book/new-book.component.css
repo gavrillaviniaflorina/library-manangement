@@ -7,3 +7,17 @@
     border-radius: 2px;
     cursor: pointer;
 }
+
+.new {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

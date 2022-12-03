@@ -101,15 +101,15 @@ const handleError = (errorRes: any) => {
     autoLogin$ = createEffect(()=>{
         return this.actions$.pipe(
             ofType(AuthAction.AUTO_LOGIN),
-            switchMap(() => {
+            map((e) => {
                 const userData: {
                     id: number;
                     email: string;
                     token:string   
-                } = JSON.parse(localStorage.getItem('userDate')!);
-                console.log(userData.email)
+                } = JSON.parse(localStorage.getItem('userData')!);
+               
                 if(!userData){
-                    return {type: 'DUMMY'}
+                    return new AuthAction.AuthenticateFail("")
                 }
                 const loadUser = new User(
                     userData.id,

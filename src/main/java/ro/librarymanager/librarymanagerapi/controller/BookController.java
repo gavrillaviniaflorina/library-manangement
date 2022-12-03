@@ -37,6 +37,7 @@ public class BookController {
         return new ResponseEntity<>(book,HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     public  ResponseEntity<Book> updateBook(@RequestBody BookDto updatedBook,@PathVariable Long id){
      this.bookService.updateBook(updatedBook);
 

@@ -49,6 +49,16 @@ public class BookService {
         bookRepo.save(new Book(book.getTitle(),book.getAuthor(),book.getGen(),book.getYear()));
     }
 
+    public Book getBookByTitle(String title){
+     Book book =this.bookRepo.titleExists(title).get();
+     if(book == null){
+         throw new BookNotFoundException(
+                 "Book not found"
+         );
+     }
+     return book;
+    }
+
 
     public void deleteBook(Long id){
 
