@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Login } from '../../login/login.model';
+import { Register } from '../../login/register.model';
 
 const handleAuthentication =(
     userId: number,
@@ -21,7 +22,6 @@ return new AuthAction.AuthentificateSuccess({
     userId:userId,
     email:email,
     token:token,
-    redirect:true
 });
 };
 
@@ -73,5 +73,59 @@ const handleError = (errorRes: any) => {
                     );
             })
         );
+    })
+
+
+    authSignUp$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(AuthAction.SIGNUP_START),
+            switchMap((authData: AuthAction.SignupStart)=>{
+                return this.authService.signUp(new Register(authData.payload.email, authData.payload.password))
+                .pipe(
+                    map(resData => {
+                        return handleAuthentication(
+                            resData.userId,
+                            resData.email,
+                            resData.token
+                        );
+                    }),
+                    catchError(errorRes => {
+                        return handleError(errorRes);
+                    })
+                );
+            })
+        )
+    })
+
+
+    autoLogin$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(AuthAction.AUTO_LOGIN),
+            map((e) => {
+                const userData: {
+                    id: number;
+                    email: string;
+                    token:string   
+                } = JSON.parse(localStorage.getItem('userData')!);
+               
+                if(!userData){
+                    return new AuthAction.AuthenticateFail("")
+                }
+                const loadUser = new User(
+                    userData.id,
+                    userData.email,
+                    userData.token
+                )
+
+                if(loadUser.token){
+                    return new AuthAction.AuthentificateSuccess({
+                        email:loadUser.email,
+                        userId:loadUser.id,
+                        token:loadUser.token
+                    })
+                }
+                return {type: 'DUMMY'}
+            })           
+        )
     })
 }

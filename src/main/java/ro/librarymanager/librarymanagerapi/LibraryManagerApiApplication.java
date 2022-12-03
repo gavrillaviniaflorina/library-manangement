@@ -36,8 +36,8 @@ public class LibraryManagerApiApplication {
 //            Faker faker=new Faker();
 //
 //
-//            User user =new User("lavinia.gavril@gamil.com","123");
-//            userRepo.save(user);
+           // User user =new User("test@gamil.com","123");
+           // userRepo.save(user);
 //            for(int i=0;i<=5;i++){
 //                Book b=new Book(faker.book().title(),faker.book().author(),faker.book().genre(),(int)(Math.random()*2000+1000));
 //                bookRepo.save(b);

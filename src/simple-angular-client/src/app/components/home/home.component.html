@@ -1,0 +1,24 @@
+<h1>Books</h1>
+<section class="buttons">
+    <button class="newBook" (click)="goToNewBook()">Create New Book</button>
+    <button class="sortTitle">Sort By Name</button>
+</section>
+<table class="tableBooks">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Year</th>
+        </tr>
+
+    </thead>
+
+    <tfoot>
+    </tfoot>
+    <tbody class="table">
+
+
+        <tr class="book" *ngFor="let book of books" [book]="book"></tr>
+    </tbody>
+</table>

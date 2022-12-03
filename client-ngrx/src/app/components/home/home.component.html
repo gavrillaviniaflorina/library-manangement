@@ -1,19 +1,23 @@
-<h1>Books</h1>
-<p><button class="button" (click)="onClick()">Create New Book</button></p>
-<table *ngIf="booksLoaded">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Genre</th>
-            <th>Year</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="book" *ngFor="let book of books" [book]="book"></tr>
-    </tbody>
-</table>
+<main>
+    <button class="button logout" (click)="Logout()">Logout</button>
+    <h1>Books</h1>
+    <p><button class="button" (click)="onClick()">Create New Book</button></p>
+    <table *ngIf="booksLoaded">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="book" *ngFor="let book of books" [book]="book"></tr>
+        </tbody>
+    </table>
 
-<div *ngIf="!booksLoaded" class="spinner-border" role="status">
-    <span class="sr-only"></span>
-</div>
+    <div *ngIf="!booksLoaded" class="spinner-border" role="status">
+        <span class="sr-only"></span>
+    </div>
+
+</main>

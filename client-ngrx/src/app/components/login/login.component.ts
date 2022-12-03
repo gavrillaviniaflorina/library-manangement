@@ -24,10 +24,14 @@ export class LoginComponent  implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.storeSub=this.store.select('user').subscribe((data)=>{
       this.error=data.authError;
-      if(data.authError==''){
+      if(data.loggedIn==true){
         this.router.navigate(['/books']);
        }
     });
+
+    this.store.dispatch(
+      new AuthActions.AutoLogin()
+    )
   }
 
   ngOnDestroy(): void {
@@ -36,18 +40,34 @@ export class LoginComponent  implements OnInit, OnDestroy {
   //@ts-ignore
   loginForm:FormGroup;
 
- onSubmit(form: NgForm){
+ onLogin(form: NgForm){
   
   const email= form.value.email;
   const password = form.value.password;
-
 
   this.store.dispatch(
     new AuthActions.LoginStart({email:email, password:password})
   )
 
+  form.reset();
+ }
+
+
+ onRegister(form: NgForm){
+  const email= form.value.email;
+  const password = form.value.password;
+
+  this.store.dispatch(
+    new AuthActions.SignupStart({email:email, password:password})
+  )
 
   form.reset();
  }
+
+ AutoLogin(){
+  this.store.dispatch(
+    new AuthActions.AutoLogin()
+  )
+}
 
 }

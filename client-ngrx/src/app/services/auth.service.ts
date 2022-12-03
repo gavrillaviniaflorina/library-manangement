@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Login } from '../components/login/login.model';
-import { LoginResponse } from '../components/user/store/authResponseData';
+import { LoginResponse, RegisterResponse } from '../components/user/store/authResponseData';
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +25,7 @@ export class AuthService {
   }
 
 
-  setLogoutTimer(expirationDuration: number) {
-    this.tokenExpirationTimer = setTimeout(() => {
-      this.store.dispatch(new AuthAction.Logout());
-    }, expirationDuration);
-  }
-
-  clearLogoutTimer() {
-    if (this.tokenExpirationTimer) {
-      clearTimeout(this.tokenExpirationTimer);
-      this.tokenExpirationTimer = null;
-    }
+  signUp(user:Login):Observable<RegisterResponse>{
+    return this.http.post<RegisterResponse>(this.server+"/user/register", user);
   }
 }

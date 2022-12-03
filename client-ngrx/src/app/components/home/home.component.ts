@@ -6,6 +6,7 @@ import { BookService } from 'src/app/services/book.service';
 import { Book } from '../book/book.model';
 import * as fromApp from '../../store/app.reducer';
 import * as BookActions from '../book/store/book-list.action'
+import * as AuthActions from '../user/store/auth.actions'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   public books$: Observable<{ books: Book[]; }>
 
 
-  constructor(private store: Store<fromApp.AppState> ,private bookService: BookService, private router: Router) {
+  constructor(private store: Store<fromApp.AppState> , private router: Router) {
 
 
   }
@@ -32,24 +33,29 @@ export class HomeComponent implements OnInit {
    this.books$ = this.store.select('bookList');
    this.booksSubcriptions=this.books$.subscribe((e: { books: Book[]; })=>{
       this.books=e.books;
-      this.booksLoaded=true;
-      
+      this.booksLoaded=true;      
     })
 
     this.store.dispatch(
       new BookActions.SetBooks(this.books)
     )
-
   }
 
 
-  ngOnDestroy(): void {
-      
+  ngOnDestroy(): void {    
     this.booksSubcriptions.unsubscribe();
   }
 
   onClick() {
     // @ts-ignore
     this.router.navigate(['/books/new']);
+  }
+
+  Logout(){
+    localStorage.removeItem('userData');
+    this.router.navigate(['/login']);
+    this.store.dispatch(
+      new AuthActions.Logout()
+    )   
   }
 }

@@ -1,0 +1,25 @@
+<main class="main-new">
+
+    <form [formGroup]="bookForm">
+        <h1>New Book</h1>
+
+        <label>Title</label>
+        <input class="title" type="text" formControlName="title">
+
+        <label>Author</label>
+        <input class="author" type="text" formControlName="author">
+
+        <label>Genre</label>
+        <input class="genre" type="text" formControlName="gen">
+
+        <label>Year</label>
+        <input class="year" type="number" formControlName="year">
+
+        <button (click)="onClick($event)" class="new">Create new book</button>
+        <button (click)="OnCancel($event)" class="cancel">Cancel</button>
+    </form>
+
+    <!-- <input #ceva> -->
+
+    <section class="errors"></section>
+</main>

@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../app/components/user/store/auth.actions'
+import * as fromApp from '../app/store/app.reducer'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +10,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client-ngrx';
+
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+    console.log("Processing beforeunload...");
+  }
+
+  public constructor(private router:Router, private store: Store<fromApp.AppState>){
+    this.router.navigate(['/']);
+  }
+
 }

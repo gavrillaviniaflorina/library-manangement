@@ -18,7 +18,6 @@ export class AuthentificateSuccess implements Action{
             email: string;
             userId: number;
             token: string;
-            redirect: boolean;
           }
     ){}
 }

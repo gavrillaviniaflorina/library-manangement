@@ -1,0 +1,26 @@
+<main class="main-update">
+
+    <form [formGroup]="bookForm">
+        <h1>Update book</h1>
+
+        <label>Title</label>
+        <input class="title" type="text" formControlName="title">
+
+        <label>Author</label>
+        <input class="author" formControlName="author">
+
+        <label>Genre</label>
+        <input class="genre" type="text" formControlName="gen">
+
+        <label>Year</label>
+        <input class="year" type="number" formControlName="year">
+
+        <button (click)="onClick($event)" class="update">Update book</button>
+        <button (click)="OnCancel($event)" class="cancel">Cancel</button>
+        <button (click)="OnDelete()" class="cancel">Delete</button>
+    </form>
+
+
+
+    <section class="errors"></section>
+</main>

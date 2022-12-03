@@ -1,4 +1,5 @@
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+<form #authForm="ngForm" class="login">
+    <h1>Login</h1>
     <div class="form-group">
         <label for="email">E-Mail</label>
         <input type="email" id="email" class="form-control" ngModel name="email" required email />
@@ -7,9 +8,17 @@
         <label for="password">Password</label>
         <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6" />
     </div>
-    <div>
-        <button class="btn btn-primary" type="submit">
+    <div class="acton-buttons">
+        <div>
+            <button class="btn btn-primary" class="button" (click)="onLogin(authForm)">
             Submit
-      </button> |
+      </button>
+        </div>
+        <div>
+            <button class="btn btn-primary" class="button" (click)="onRegister(authForm)">
+            Sign Up
+      </button>
+        </div>
     </div>
+
 </form>
