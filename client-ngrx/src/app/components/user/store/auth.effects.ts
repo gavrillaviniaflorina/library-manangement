@@ -7,20 +7,20 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from 'src/app/services/auth.service';
 import { Login } from '../../login/login.model';
 import { Register } from '../../login/register.model';
+import { NotificationService } from 'src/app/services/notification.service';
 
 const handleAuthentication =(
     userId: number,
     email: string,
     token: string  
 ) =>{
-
-const user = new User(userId, email, token);
-localStorage.setItem('userData', JSON.stringify(user));
-return new AuthAction.AuthentificateSuccess({
-    userId:userId,
-    email:email,
-    token:token,
-});
+    const user = new User(userId, email, token);
+    localStorage.setItem('userData', JSON.stringify(user));
+    return new AuthAction.AuthentificateSuccess({
+        userId:userId,
+        email:email,
+        token:token,
+    });
 };
 
 const handleError = (errorRes: any) => {
@@ -46,9 +46,9 @@ const handleError = (errorRes: any) => {
   export class AuthEffects {
 
     constructor(private actions$: Actions,
-         private authService: AuthService
+         private authService: AuthService,
+         private notificationService:NotificationService
          ){}
-
 
     authLogin$ = createEffect(()=> {
         return this.actions$.pipe(
@@ -64,13 +64,13 @@ const handleError = (errorRes: any) => {
                             );
                         }),
                         catchError(errorRes => {
+                            this.notificationService.onError('Invalid credentials')
                             return handleError(errorRes);
                         })
                     );
             })
         );
     })
-
 
     authSignUp$ = createEffect(()=>{
         return this.actions$.pipe(
@@ -92,7 +92,6 @@ const handleError = (errorRes: any) => {
             })
         )
     })
-
 
     autoLogin$ = createEffect(()=>{
         return this.actions$.pipe(
