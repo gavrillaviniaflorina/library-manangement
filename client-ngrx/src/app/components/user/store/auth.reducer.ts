@@ -1,5 +1,6 @@
 import { User } from "../user.model";
 import * as AuthActions from '../store/auth.actions'
+import { NotificationService } from "src/app/services/notification.service";
 
 export interface State {
     user: User;
@@ -20,7 +21,6 @@ export function authReducer(
 ){
     switch(action.type){
         case AuthActions.AUTHENTICATE_SUCCESS:
-            console.log('aici')
             const user = new User(
                
                 action.payload.userId,
@@ -35,7 +35,6 @@ export function authReducer(
               };
 
         case AuthActions.AUTHENTICATE_FAIL:
-            console.log('aici')
            return {
                 ...state,
                 authError:  action.payload,
