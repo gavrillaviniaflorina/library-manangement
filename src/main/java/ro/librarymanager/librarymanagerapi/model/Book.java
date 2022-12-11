@@ -2,7 +2,6 @@ package ro.librarymanager.librarymanagerapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -32,7 +31,6 @@ public class Book implements Comparable {
       this.gen=genre;
       this.year=year;
     }
-
 
     @Override
     public int compareTo(Object o) {

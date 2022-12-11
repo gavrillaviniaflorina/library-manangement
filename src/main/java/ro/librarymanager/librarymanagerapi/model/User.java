@@ -1,13 +1,11 @@
 package ro.librarymanager.librarymanagerapi.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ro.librarymanager.librarymanagerapi.security.UserPermission;
 import ro.librarymanager.librarymanagerapi.security.UserRole;
 
 import javax.persistence.*;
@@ -31,8 +29,6 @@ public class User implements UserDetails {
         this.email = email;
         this.password = new BCryptPasswordEncoder().encode(password);
     }
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

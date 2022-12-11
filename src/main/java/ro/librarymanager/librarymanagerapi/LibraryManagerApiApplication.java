@@ -1,6 +1,5 @@
 package ro.librarymanager.librarymanagerapi;
 
-
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

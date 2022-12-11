@@ -1,6 +1,5 @@
 package ro.librarymanager.librarymanagerapi.controller;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ro.librarymanager.librarymanagerapi.dto.BookDto;
 import ro.librarymanager.librarymanagerapi.model.Book;
 import ro.librarymanager.librarymanagerapi.service.BookService;
-
 import java.util.List;
 
 @RestController
@@ -16,9 +14,7 @@ import java.util.List;
 @RequestMapping("/api/v1/books")
 public class BookController {
 
-    
     private BookService bookService;
-
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
@@ -61,7 +57,4 @@ public class BookController {
 //    public ResponseEntity<List<Book>> sortBooksByTitile(){
 //        return new ResponseEntity<List<Book>>(bookService.sortByName(),HttpStatus.OK);
 //    }
-
-
-
 }

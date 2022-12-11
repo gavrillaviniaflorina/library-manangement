@@ -10,7 +10,6 @@ public class BookDto {
     private String gen;
     private int year;
 
-
     public BookDto(String title, String author, String genre, int i) {
         this.title=title;
         this.author=author;

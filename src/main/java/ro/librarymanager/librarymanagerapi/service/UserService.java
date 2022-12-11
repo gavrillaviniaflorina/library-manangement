@@ -1,19 +1,11 @@
 package ro.librarymanager.librarymanagerapi.service;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import ro.librarymanager.librarymanagerapi.dto.UserDto;
-import ro.librarymanager.librarymanagerapi.exceptions.EmailExistException;
 import ro.librarymanager.librarymanagerapi.exceptions.UserExistsException;
 import ro.librarymanager.librarymanagerapi.exceptions.UserNotFoundException;
 import ro.librarymanager.librarymanagerapi.model.User;
 import ro.librarymanager.librarymanagerapi.repository.UserRepo;
-
-import java.io.IOException;
-import java.util.List;
-
-import static ro.librarymanager.librarymanagerapi.constants.Utils.*;
-
 
 @Service
 public class UserService {
@@ -56,8 +48,4 @@ public class UserService {
         return this.userRepository.findIdByUserName(email).get();
 
     }
-
-
-
-
 }

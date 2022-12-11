@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import ro.librarymanager.librarymanagerapi.model.User;
 import ro.librarymanager.librarymanagerapi.repository.UserRepo;
 
-
 @Component
 public class UserDetailsImpl implements UserDetailsService {
     private UserRepo userRepository;

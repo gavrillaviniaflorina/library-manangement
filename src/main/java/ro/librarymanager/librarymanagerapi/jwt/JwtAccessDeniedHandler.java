@@ -16,7 +16,6 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static ro.librarymanager.librarymanagerapi.constants.Utils.ACCESS_DENIED_MESSAGE;
 
-
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
